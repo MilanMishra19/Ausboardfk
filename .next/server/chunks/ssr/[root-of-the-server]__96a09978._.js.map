@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 22, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/mishr/OneDrive/Desktop/ausboard/app/dashboard/templates/page.tsx"],"sourcesContent":["\r\n\r\nexport default function Templates(){\r\n    return(\r\n        <div className=\"\"></div>\r\n    )\r\n}"],"names":[],"mappings":";;;;;AAEe,SAAS;IACpB,qBACI,8OAAC;QAAI,WAAU;;;;;;AAEvB","debugId":null}}]
+}
