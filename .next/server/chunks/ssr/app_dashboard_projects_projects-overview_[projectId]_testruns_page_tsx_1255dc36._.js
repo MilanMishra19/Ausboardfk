@@ -19,6 +19,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 ;
 const BACKEND_URL = ("TURBOPACK compile-time value", "http://localhost:8080");
 function TestcasesOverview() {
+    const [runningTests, setRunningTests] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(new Set());
     const { projectId } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useParams"])();
     const [testCases, setTestCases] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
     const [project, setProject] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
@@ -52,6 +53,7 @@ function TestcasesOverview() {
         projectId
     ]);
     const handleSingleRun = async (testcaseId)=>{
+        setRunningTests((prev)=>new Set(prev).add(testcaseId));
         try {
             const res = await fetch(`${BACKEND_URL}/api/testcase/run/${testcaseId}`, {
                 method: "POST",
@@ -64,15 +66,23 @@ function TestcasesOverview() {
                 const errorText = await res.text();
                 throw new Error(errorText || "Failed to run test");
             }
-            const data = await res.json(); // Correctly parse as JSON
+            const data = await res.json();
             alert(`Test ${data.status}: ${data.response?.substring(0, 100)}`);
         } catch (err) {
             const errorMsg = err instanceof Error ? err.message : "Unknown error";
             console.error(err);
             alert(`Error in running tests: ${errorMsg}`);
+        } finally{
+            setRunningTests((prev)=>{
+                const updated = new Set(prev);
+                updated.delete(testcaseId);
+                return updated;
+            });
         }
     };
     const handleRunAll = async ()=>{
+        const allIds = testCases.map((tc)=>tc.id);
+        setRunningTests(new Set(allIds));
         try {
             const res = await fetch(`${BACKEND_URL}/api/testcase/run-all/${projectId}`, {
                 method: 'POST',
@@ -87,6 +97,26 @@ function TestcasesOverview() {
         } catch (err) {
             console.error(err);
             alert(`Failed to run all tests`);
+        } finally{
+            setRunningTests(new Set());
+        }
+    };
+    const handleDelete = async (testcaseId)=>{
+        const confirmDelete = confirm("Are you sure you want to delete this testcase. Testruns associated with it too will be deleted.");
+        if (!confirmDelete) return;
+        try {
+            const res = await fetch(`${BACKEND_URL}/api/testcase/${testcaseId}`, {
+                method: "DELETE",
+                credentials: "include"
+            });
+            if (!res.ok) {
+                throw new Error("Failed to delete testcase");
+            }
+            setTestCases((prev)=>prev.filter((tc)=>tc.id !== testcaseId));
+            alert("Testcase deleted successfully!");
+        } catch (err) {
+            console.error(err);
+            alert("An error occured while deleting your testcase.");
         }
     };
     if (loading) {
@@ -97,7 +127,7 @@ function TestcasesOverview() {
                     className: "animate-spin rounded-full h-12 w-12 border-b-2 border-white mr-4"
                 }, void 0, false, {
                     fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                    lineNumber: 103,
+                    lineNumber: 134,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -105,13 +135,13 @@ function TestcasesOverview() {
                     children: "Fetching your projects..."
                 }, void 0, false, {
                     fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                    lineNumber: 104,
+                    lineNumber: 135,
                     columnNumber: 17
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-            lineNumber: 102,
+            lineNumber: 133,
             columnNumber: 13
         }, this);
     }
@@ -132,12 +162,12 @@ function TestcasesOverview() {
                                 children: "Project Overview"
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                lineNumber: 114,
+                                lineNumber: 145,
                                 columnNumber: 7
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                            lineNumber: 113,
+                            lineNumber: 144,
                             columnNumber: 5
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -158,12 +188,12 @@ function TestcasesOverview() {
                                             d: "m1 9 4-4-4-4"
                                         }, void 0, false, {
                                             fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                            lineNumber: 121,
+                                            lineNumber: 152,
                                             columnNumber: 11
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                        lineNumber: 120,
+                                        lineNumber: 151,
                                         columnNumber: 9
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -172,18 +202,18 @@ function TestcasesOverview() {
                                         children: "Add Testcases"
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                        lineNumber: 123,
+                                        lineNumber: 154,
                                         columnNumber: 9
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                lineNumber: 119,
+                                lineNumber: 150,
                                 columnNumber: 7
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                            lineNumber: 118,
+                            lineNumber: 149,
                             columnNumber: 5
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -205,12 +235,12 @@ function TestcasesOverview() {
                                             d: "m1 9 4-4-4-4"
                                         }, void 0, false, {
                                             fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                            lineNumber: 129,
+                                            lineNumber: 160,
                                             columnNumber: 11
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                        lineNumber: 128,
+                                        lineNumber: 159,
                                         columnNumber: 9
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -218,29 +248,29 @@ function TestcasesOverview() {
                                         children: "Testcase Overview"
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                        lineNumber: 131,
+                                        lineNumber: 162,
                                         columnNumber: 9
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                lineNumber: 127,
+                                lineNumber: 158,
                                 columnNumber: 7
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                            lineNumber: 126,
+                            lineNumber: 157,
                             columnNumber: 5
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                    lineNumber: 112,
+                    lineNumber: 143,
                     columnNumber: 3
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                lineNumber: 111,
+                lineNumber: 142,
                 columnNumber: 1
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -251,7 +281,7 @@ function TestcasesOverview() {
                         children: "TESTCASES OVERVIEW"
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                        lineNumber: 137,
+                        lineNumber: 168,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -263,124 +293,71 @@ function TestcasesOverview() {
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                        lineNumber: 138,
+                        lineNumber: 169,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                lineNumber: 136,
+                lineNumber: 167,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "flex flex-row justify-between gap-5",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "flex flex-col items-center justify-center rounded-2xl backdrop-blur-md shadow-xl border border-white/20 bg-gradient-to-br from-red-500 to-red-950 p-6 gap-2",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                                className: "text-xl text-red-950 drop-shadow-[0_0_10px_rgba(255,0,0,0.8)] font-bold",
-                                children: "Run Pre-defined testcases"
+                className: "flex w-full justify-between gap-5",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex flex-col items-center justify-center rounded-2xl backdrop-blur-md shadow-xl border border-white/20 bg-gradient-to-br from-red-500 to-red-950 p-6 gap-2",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
+                            className: "text-xl text-red-950 drop-shadow-[0_0_10px_rgba(255,0,0,0.8)] font-bold",
+                            children: "Go to Testruns Overview"
+                        }, void 0, false, {
+                            fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
+                            lineNumber: 173,
+                            columnNumber: 17
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                            src: "/globe.svg",
+                            alt: "",
+                            height: 500,
+                            width: 500,
+                            className: "object-cover h-12 w-12"
+                        }, void 0, false, {
+                            fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
+                            lineNumber: 174,
+                            columnNumber: 17
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            className: "text-sm text-white/50 font-light",
+                            children: "Find out if your tests passed, time taken to execute and much more in your Test runs overview.Additionally you can stress test as well as load test to find out metrics such as latency,throughput and much more"
+                        }, void 0, false, {
+                            fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
+                            lineNumber: 175,
+                            columnNumber: 17
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                            href: `/dashboard/projects/projects-overview/${projectId}/testruns/testruns-detail`,
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                className: "w-45 py-2 px-4 text-white font-semibold rounded-md bg-red-600 shadow-[0_0_20px_rgba(255,0,0,0.7)] hover:shadow-[0_0_30px_rgba(255,0,0,1)] transition",
+                                children: "Go To Overview"
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                lineNumber: 142,
-                                columnNumber: 17
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                src: "/globe.svg",
-                                alt: "",
-                                height: 500,
-                                width: 500,
-                                className: "object-cover h-12 w-12"
-                            }, void 0, false, {
-                                fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                lineNumber: 143,
-                                columnNumber: 17
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-sm text-white/50 font-light",
-                                children: "Run generic testcases suitable for all websites irrespective of website catagory and get a brief idea of the functionality of your site."
-                            }, void 0, false, {
-                                fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                lineNumber: 144,
-                                columnNumber: 17
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                href: "/login",
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                    className: "w-32 py-2 px-4 text-white font-semibold rounded-md bg-red-600 shadow-[0_0_20px_rgba(255,0,0,0.7)] hover:shadow-[0_0_30px_rgba(255,0,0,1)] transition",
-                                    children: "Run"
-                                }, void 0, false, {
-                                    fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                    lineNumber: 146,
-                                    columnNumber: 21
-                                }, this)
-                            }, void 0, false, {
-                                fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                lineNumber: 145,
-                                columnNumber: 17
+                                lineNumber: 177,
+                                columnNumber: 21
                             }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                        lineNumber: 141,
-                        columnNumber: 18
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "flex flex-col items-center justify-center rounded-2xl backdrop-blur-md shadow-xl border border-white/20 bg-gradient-to-br from-red-500 to-red-950 p-6 gap-2",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                                className: "text-xl text-red-950 drop-shadow-[0_0_10px_rgba(255,0,0,0.8)]  font-bold",
-                                children: "Run Performance testing"
-                            }, void 0, false, {
-                                fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                lineNumber: 152,
-                                columnNumber: 17
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                src: "/perf.svg",
-                                alt: "",
-                                height: 500,
-                                width: 500,
-                                className: "object-cover h-12 w-12"
-                            }, void 0, false, {
-                                fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                lineNumber: 153,
-                                columnNumber: 17
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-sm text-white/50 font-light",
-                                children: "Run generic testcases suitable for all websites irrespective of website catagory and get a brief idea of the functionality of your site."
-                            }, void 0, false, {
-                                fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                lineNumber: 154,
-                                columnNumber: 17
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                href: "/login",
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                    className: "w-32 py-2 px-4 text-white font-semibold rounded-md bg-red-600 shadow-[0_0_20px_rgba(255,0,0,0.7)] hover:shadow-[0_0_30px_rgba(255,0,0,1)] transition",
-                                    children: "Run"
-                                }, void 0, false, {
-                                    fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                    lineNumber: 156,
-                                    columnNumber: 21
-                                }, this)
-                            }, void 0, false, {
-                                fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                lineNumber: 155,
-                                columnNumber: 17
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                        lineNumber: 151,
-                        columnNumber: 17
-                    }, this)
-                ]
-            }, void 0, true, {
+                        }, void 0, false, {
+                            fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
+                            lineNumber: 176,
+                            columnNumber: 17
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
+                    lineNumber: 172,
+                    columnNumber: 18
+                }, this)
+            }, void 0, false, {
                 fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                lineNumber: 140,
+                lineNumber: 171,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -392,7 +369,7 @@ function TestcasesOverview() {
                         children: "Run All"
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                        lineNumber: 163,
+                        lineNumber: 184,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
@@ -407,7 +384,7 @@ function TestcasesOverview() {
                                             children: "Title"
                                         }, void 0, false, {
                                             fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                            lineNumber: 169,
+                                            lineNumber: 190,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -415,7 +392,7 @@ function TestcasesOverview() {
                                             children: "Endpoint"
                                         }, void 0, false, {
                                             fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                            lineNumber: 170,
+                                            lineNumber: 191,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -423,7 +400,7 @@ function TestcasesOverview() {
                                             children: "Method"
                                         }, void 0, false, {
                                             fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                            lineNumber: 171,
+                                            lineNumber: 192,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -431,15 +408,15 @@ function TestcasesOverview() {
                                             children: "Priority"
                                         }, void 0, false, {
                                             fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                            lineNumber: 172,
+                                            lineNumber: 193,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                             className: "px-6 py-3",
-                                            children: "Status"
+                                            children: "Test Type"
                                         }, void 0, false, {
                                             fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                            lineNumber: 173,
+                                            lineNumber: 194,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -447,18 +424,26 @@ function TestcasesOverview() {
                                             children: "Decision"
                                         }, void 0, false, {
                                             fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                            lineNumber: 174,
+                                            lineNumber: 195,
+                                            columnNumber: 29
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                            className: "px-6 py-3",
+                                            children: "Delete"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
+                                            lineNumber: 196,
                                             columnNumber: 29
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                    lineNumber: 168,
+                                    lineNumber: 189,
                                     columnNumber: 25
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                lineNumber: 167,
+                                lineNumber: 188,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -471,12 +456,12 @@ function TestcasesOverview() {
                                         children: "No TestCases added"
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                        lineNumber: 180,
+                                        lineNumber: 202,
                                         columnNumber: 33
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                    lineNumber: 179,
+                                    lineNumber: 201,
                                     columnNumber: 29
                                 }, this) : testCases.map((tc, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
                                         className: "border-b border-gray-700 text-white hover:bg-[#222222] transition duration-200",
@@ -486,7 +471,7 @@ function TestcasesOverview() {
                                                 children: tc.title
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                                lineNumber: 185,
+                                                lineNumber: 207,
                                                 columnNumber: 37
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -494,7 +479,7 @@ function TestcasesOverview() {
                                                 children: tc.endpoints
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                                lineNumber: 186,
+                                                lineNumber: 208,
                                                 columnNumber: 37
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -502,7 +487,7 @@ function TestcasesOverview() {
                                                 children: tc.method
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                                lineNumber: 187,
+                                                lineNumber: 209,
                                                 columnNumber: 37
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -510,67 +495,77 @@ function TestcasesOverview() {
                                                 children: tc.priority.toUpperCase()
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                                lineNumber: 188,
+                                                lineNumber: 210,
                                                 columnNumber: 37
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                 className: "px-6 py-4",
-                                                children: tc.status || '-'
+                                                children: tc.testType?.toLocaleUpperCase()
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                                lineNumber: 189,
+                                                lineNumber: 211,
                                                 columnNumber: 37
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                 className: "px-6 py-4",
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                                    href: "#",
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    className: "text-sm text-blue-500 disabled:text-red-400 disabled:animate-pulse",
                                                     onClick: ()=>handleSingleRun(tc.id),
-                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                        className: "text-sm text-blue-500",
-                                                        children: "Run"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                                        lineNumber: 191,
-                                                        columnNumber: 93
-                                                    }, this)
+                                                    disabled: runningTests.has(tc.id),
+                                                    children: runningTests.has(tc.id) ? "Running..." : "Run"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                                    lineNumber: 191,
-                                                    columnNumber: 41
+                                                    lineNumber: 213,
+                                                    columnNumber: 43
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                                lineNumber: 190,
+                                                lineNumber: 212,
                                                 columnNumber: 37
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                className: "px-6 py-4",
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                    className: "text-red-500 text-sm hover:text-red-700",
+                                                    onClick: ()=>handleDelete(tc.id),
+                                                    children: "Delete"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
+                                                    lineNumber: 222,
+                                                    columnNumber: 43
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
+                                                lineNumber: 221,
+                                                columnNumber: 41
                                             }, this)
                                         ]
                                     }, index, true, {
                                         fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                        lineNumber: 184,
+                                        lineNumber: 206,
                                         columnNumber: 33
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                                lineNumber: 177,
+                                lineNumber: 199,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                        lineNumber: 166,
+                        lineNumber: 187,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-                lineNumber: 162,
+                lineNumber: 183,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/dashboard/projects/projects-overview/[projectId]/testruns/page.tsx",
-        lineNumber: 110,
+        lineNumber: 141,
         columnNumber: 9
     }, this);
 }

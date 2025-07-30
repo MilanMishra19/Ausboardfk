@@ -57,11 +57,6 @@ export default function Sidebar() {
             <span className="text-black uppercase text-sm">Docs</span>
           </Link>
 
-          <Link href="/dashboard/templates" className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/10 transition">
-            <Image src="/template.svg" alt="templates" width={24} height={24} />
-            <span className="text-black uppercase text-sm">Templates</span>
-          </Link>
-
           <Link href="/dashboard/settings" className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/10 transition">
             <Image src="/setting.svg" alt="settings" width={24} height={24} />
             <span className="text-black uppercase text-sm">Settings</span>

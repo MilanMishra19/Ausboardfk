@@ -97,12 +97,34 @@ export default function Project(){
     ),
   },
   {
-    title: "Run tests!",
+    title: "Add testcases",
     description:
-      "Use our platform to run various pre-defined tests, get your metrics at your project dashboard.",
+      "Fill in the details to add testcases. Input headers and payload only if necessary else it is optional.",
     content: (
       <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] text-white">
-        <Image height={500} width={500} src='/ausboard.jpeg' alt='item' className='object-cover w-full h-full'/>
+        <Image height={500} width={500} src='/add.jpeg' alt='item' className='object-cover w-full h-full'/>
+    
+      </div>
+    ),
+  },
+  {
+    title: "Run tests!",
+    description:
+      "CYou can run individual tests by clicking on 'Run'under the decision column or run all tests at once by clicking the 'Run All' button.",
+    content: (
+      <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] text-white">
+        <Image height={500} width={500} src='/run.jpeg' alt='item' className='object-cover w-full h-full'/>
+    
+      </div>
+    ),
+  },
+  {
+    title: "Keep adding, Keep testing!",
+    description:
+      "View all projects under the projects overview tab and add or run more tests by clicking the 3 dots.",
+    content: (
+      <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] text-white">
+        <Image height={500} width={500} src='/addmore.jpeg' alt='item' className='object-cover w-full h-full'/>
     
       </div>
     ),

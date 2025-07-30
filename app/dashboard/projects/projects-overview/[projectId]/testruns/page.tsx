@@ -13,6 +13,7 @@ interface TestCaseDetails {
     method: string;
     title: string;
     status?: string;
+    testType:string,
 }
 interface TestRunResult {
   id: string;
@@ -28,6 +29,7 @@ interface ProjectDetails {
 }
 
 export default function TestcasesOverview() {
+  const [runningTests, setRunningTests] = useState<Set<string>>(new Set());
     const { projectId } = useParams<{ projectId: string }>();
     const [testCases, setTestCases] = useState<TestCaseDetails[]>([]);
     const [project, setProject] = useState<ProjectDetails | null>(null);
@@ -54,6 +56,7 @@ export default function TestcasesOverview() {
         fetchDetails();
     }, [projectId]);
     const handleSingleRun = async (testcaseId: string) => {
+      setRunningTests(prev => new Set(prev).add(testcaseId));
   try {
     const res = await fetch(`${BACKEND_URL}/api/testcase/run/${testcaseId}`, {
       method: "POST",
@@ -68,16 +71,24 @@ export default function TestcasesOverview() {
       throw new Error(errorText || "Failed to run test");
     }
 
-    const data = await res.json(); // Correctly parse as JSON
+    const data = await res.json(); 
     alert(`Test ${data.status}: ${data.response?.substring(0, 100)}`);
   } catch (err: unknown) {
     const errorMsg = err instanceof Error ? err.message : "Unknown error";
     console.error(err);
     alert(`Error in running tests: ${errorMsg}`);
+  } finally {
+    setRunningTests(prev=>{
+      const updated = new Set(prev);
+      updated.delete(testcaseId);
+      return updated;
+    });
   }
 };
 
     const handleRunAll = async () => {
+      const allIds = testCases.map(tc => tc.id);
+      setRunningTests(new Set(allIds));
   try {
     const res = await fetch(`${BACKEND_URL}/api/testcase/run-all/${projectId}`, {
       method: 'POST',
@@ -94,8 +105,28 @@ export default function TestcasesOverview() {
   } catch (err) {
     console.error(err);
     alert(`Failed to run all tests`);
+  } finally {
+    setRunningTests(new Set());
   }
 };
+   const handleDelete = async(testcaseId:string)=>{
+    const confirmDelete = confirm("Are you sure you want to delete this testcase. Testruns associated with it too will be deleted.");
+    if(!confirmDelete) return;
+    try{
+      const res = await fetch(`${BACKEND_URL}/api/testcase/${testcaseId}`,{
+        method:"DELETE",
+        credentials:"include"
+      });
+      if(!res.ok){
+        throw new Error("Failed to delete testcase");
+      }
+      setTestCases(prev=>prev.filter(tc=>tc.id!==testcaseId));
+      alert("Testcase deleted successfully!");
+    } catch (err) {
+      console.error(err);
+      alert("An error occured while deleting your testcase.");
+    }
+   }
 
     if (loading) {
         return (
@@ -137,24 +168,14 @@ export default function TestcasesOverview() {
             <h1 className="text-3xl tracking-widest text-white font-bold">TESTCASES OVERVIEW</h1>
             <h1 className="text-sm tracking-widest text-white/30 font-light">{project?.name} : {project?.url}</h1>
             </div>
-            <div className="flex flex-row justify-between gap-5">
+            <div className="flex w-full justify-between gap-5">
                  <div className="flex flex-col items-center justify-center rounded-2xl backdrop-blur-md shadow-xl border border-white/20 bg-gradient-to-br from-red-500 to-red-950 p-6 gap-2">
-                <h1 className="text-xl text-red-950 drop-shadow-[0_0_10px_rgba(255,0,0,0.8)] font-bold">Run Pre-defined testcases</h1>
+                <h1 className="text-xl text-red-950 drop-shadow-[0_0_10px_rgba(255,0,0,0.8)] font-bold">Go to Testruns Overview</h1>
                 <Image src='/globe.svg' alt="" height={500} width={500} className="object-cover h-12 w-12"/>
-                <p className="text-sm text-white/50 font-light">Run generic testcases suitable for all websites irrespective of website catagory and get a brief idea of the functionality of your site.</p>
-                <Link href="/login">
-                    <button className="w-32 py-2 px-4 text-white font-semibold rounded-md bg-red-600 shadow-[0_0_20px_rgba(255,0,0,0.7)] hover:shadow-[0_0_30px_rgba(255,0,0,1)] transition">
-                    Run
-                    </button>
-                </Link>
-                </div>
-                <div className="flex flex-col items-center justify-center rounded-2xl backdrop-blur-md shadow-xl border border-white/20 bg-gradient-to-br from-red-500 to-red-950 p-6 gap-2">
-                <h1 className="text-xl text-red-950 drop-shadow-[0_0_10px_rgba(255,0,0,0.8)]  font-bold">Run Performance testing</h1>
-                <Image src='/perf.svg' alt="" height={500} width={500} className="object-cover h-12 w-12"/>
-                <p className="text-sm text-white/50 font-light">Run generic testcases suitable for all websites irrespective of website catagory and get a brief idea of the functionality of your site.</p>
-                <Link href="/login">
-                    <button className="w-32 py-2 px-4 text-white font-semibold rounded-md bg-red-600 shadow-[0_0_20px_rgba(255,0,0,0.7)] hover:shadow-[0_0_30px_rgba(255,0,0,1)] transition">
-                    Run
+                <p className="text-sm text-white/50 font-light">Find out if your tests passed, time taken to execute and much more in your Test runs overview.Additionally you can stress test as well as load test to find out metrics such as latency,throughput and much more</p>
+                <Link href={`/dashboard/projects/projects-overview/${projectId}/testruns/testruns-detail`}>
+                    <button className="w-45 py-2 px-4 text-white font-semibold rounded-md bg-red-600 shadow-[0_0_20px_rgba(255,0,0,0.7)] hover:shadow-[0_0_30px_rgba(255,0,0,1)] transition">
+                    Go To Overview
                     </button>
                 </Link>
                 </div>
@@ -170,8 +191,9 @@ export default function TestcasesOverview() {
                             <th className="px-6 py-3">Endpoint</th>
                             <th className="px-6 py-3">Method</th>
                             <th className="px-6 py-3">Priority</th>
-                            <th className="px-6 py-3">Status</th>
+                            <th className="px-6 py-3">Test Type</th>
                             <th className="px-6 py-3">Decision</th>
+                            <th className="px-6 py-3">Delete</th>
                         </tr>
                     </thead>
                     <tbody className="bg-[#3f3939] text-center">
@@ -186,10 +208,22 @@ export default function TestcasesOverview() {
                                     <td className="px-6 py-4">{tc.endpoints}</td>
                                     <td className="px-6 py-4">{tc.method}</td>
                                     <td className={`px-6 py-4 ${tc.priority==='low'?'text-green-500':tc.priority==='medium'?'text-yellow-500':'text-red-500'}`}>{tc.priority.toUpperCase()}</td>
-                                    <td className="px-6 py-4">{tc.status|| '-'}</td>
+                                    <td className="px-6 py-4">{(tc.testType)?.toLocaleUpperCase()}</td>
                                     <td className="px-6 py-4">
-                                        <Link href='#' onClick={()=>handleSingleRun(tc.id)}><p className="text-sm text-blue-500">Run</p></Link>
-                                    </td>
+                                          <button
+                                            className="text-sm text-blue-500 disabled:text-red-400 disabled:animate-pulse"
+                                            onClick={() => handleSingleRun(tc.id)}
+                                            disabled={runningTests.has(tc.id)}
+                                          >
+                                            {runningTests.has(tc.id) ? "Running..." : "Run"}
+                                          </button>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                          <button className="text-red-500 text-sm hover:text-red-700"
+                                          onClick={()=>handleDelete(tc.id)}>
+                                            Delete
+                                          </button>
+                                        </td>
                                 </tr>
                             ))
                         )}

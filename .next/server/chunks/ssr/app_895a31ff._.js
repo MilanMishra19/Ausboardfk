@@ -297,14 +297,14 @@ function Project() {
             }, this)
         },
         {
-            title: "Run tests!",
-            description: "Use our platform to run various pre-defined tests, get your metrics at your project dashboard.",
+            title: "Add testcases",
+            description: "Fill in the details to add testcases. Input headers and payload only if necessary else it is optional.",
             content: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] text-white",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                     height: 500,
                     width: 500,
-                    src: "/ausboard.jpeg",
+                    src: "/add.jpeg",
                     alt: "item",
                     className: "object-cover w-full h-full"
                 }, void 0, false, {
@@ -315,6 +315,50 @@ function Project() {
             }, void 0, false, {
                 fileName: "[project]/app/dashboard/projects/page.tsx",
                 lineNumber: 104,
+                columnNumber: 7
+            }, this)
+        },
+        {
+            title: "Run tests!",
+            description: "CYou can run individual tests by clicking on 'Run'under the decision column or run all tests at once by clicking the 'Run All' button.",
+            content: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] text-white",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                    height: 500,
+                    width: 500,
+                    src: "/run.jpeg",
+                    alt: "item",
+                    className: "object-cover w-full h-full"
+                }, void 0, false, {
+                    fileName: "[project]/app/dashboard/projects/page.tsx",
+                    lineNumber: 116,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/app/dashboard/projects/page.tsx",
+                lineNumber: 115,
+                columnNumber: 7
+            }, this)
+        },
+        {
+            title: "Keep adding, Keep testing!",
+            description: "View all projects under the projects overview tab and add or run more tests by clicking the 3 dots.",
+            content: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] text-white",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                    height: 500,
+                    width: 500,
+                    src: "/addmore.jpeg",
+                    alt: "item",
+                    className: "object-cover w-full h-full"
+                }, void 0, false, {
+                    fileName: "[project]/app/dashboard/projects/page.tsx",
+                    lineNumber: 127,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/app/dashboard/projects/page.tsx",
+                lineNumber: 126,
                 columnNumber: 7
             }, this)
         }
@@ -330,20 +374,20 @@ function Project() {
                         children: "STEP BY STEP GUIDE TO SET UP YOUR PROJECT"
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/projects/page.tsx",
-                        lineNumber: 114,
+                        lineNumber: 136,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$components$2f$StickyScroll$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["StickyScroll"], {
                         content: content
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/projects/page.tsx",
-                        lineNumber: 115,
+                        lineNumber: 137,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/dashboard/projects/page.tsx",
-                lineNumber: 113,
+                lineNumber: 135,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -351,7 +395,7 @@ function Project() {
                 children: "PROJECT DETAILS"
             }, void 0, false, {
                 fileName: "[project]/app/dashboard/projects/page.tsx",
-                lineNumber: 117,
+                lineNumber: 139,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -367,7 +411,7 @@ function Project() {
                         }
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/projects/page.tsx",
-                        lineNumber: 119,
+                        lineNumber: 141,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -379,7 +423,7 @@ function Project() {
                                 children: message
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/projects/page.tsx",
-                                lineNumber: 130,
+                                lineNumber: 152,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -394,7 +438,7 @@ function Project() {
                                         onChange: (e)=>setTitle(e.target.value)
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/projects/page.tsx",
-                                        lineNumber: 135,
+                                        lineNumber: 157,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -407,7 +451,7 @@ function Project() {
                                         onChange: (e)=>setCurrentUser(e.target.value)
                                     }, void 0, false, {
                                         fileName: "[project]/app/dashboard/projects/page.tsx",
-                                        lineNumber: 143,
+                                        lineNumber: 165,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -422,7 +466,7 @@ function Project() {
                                                 children: "Select website category"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/projects/page.tsx",
-                                                lineNumber: 153,
+                                                lineNumber: 175,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -431,7 +475,7 @@ function Project() {
                                                 children: "E-Commerce"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/projects/page.tsx",
-                                                lineNumber: 154,
+                                                lineNumber: 176,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -440,7 +484,7 @@ function Project() {
                                                 children: "Blog"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/projects/page.tsx",
-                                                lineNumber: 155,
+                                                lineNumber: 177,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -449,7 +493,7 @@ function Project() {
                                                 children: "Portfolio"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/projects/page.tsx",
-                                                lineNumber: 156,
+                                                lineNumber: 178,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -458,19 +502,19 @@ function Project() {
                                                 children: "Dashboard"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/projects/page.tsx",
-                                                lineNumber: 157,
+                                                lineNumber: 179,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/dashboard/projects/page.tsx",
-                                        lineNumber: 152,
+                                        lineNumber: 174,
                                         columnNumber: 21
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/dashboard/projects/page.tsx",
-                                lineNumber: 134,
+                                lineNumber: 156,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -482,7 +526,7 @@ function Project() {
                                 onChange: (e)=>setUrl(e.target.value)
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/projects/page.tsx",
-                                lineNumber: 160,
+                                lineNumber: 182,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -492,7 +536,7 @@ function Project() {
                                 onChange: (e)=>setDesc(e.target.value)
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/projects/page.tsx",
-                                lineNumber: 168,
+                                lineNumber: 190,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -501,7 +545,7 @@ function Project() {
                                 children: "Submit"
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/projects/page.tsx",
-                                lineNumber: 174,
+                                lineNumber: 196,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -511,30 +555,30 @@ function Project() {
                                     children: "Go to projects dashboard ➡"
                                 }, void 0, false, {
                                     fileName: "[project]/app/dashboard/projects/page.tsx",
-                                    lineNumber: 181,
+                                    lineNumber: 203,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/dashboard/projects/page.tsx",
-                                lineNumber: 180,
+                                lineNumber: 202,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/dashboard/projects/page.tsx",
-                        lineNumber: 128,
+                        lineNumber: 150,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/dashboard/projects/page.tsx",
-                lineNumber: 118,
+                lineNumber: 140,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/dashboard/projects/page.tsx",
-        lineNumber: 112,
+        lineNumber: 134,
         columnNumber: 9
     }, this);
 }

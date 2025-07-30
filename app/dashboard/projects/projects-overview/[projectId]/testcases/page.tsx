@@ -12,6 +12,7 @@ export default function Testcases() {
   const [headersInput, setHeadersInput] = useState('');
   const [payloadInput, setPayloadInput] = useState('');
   const [method, setMethod] = useState('');
+  const [testType,setTestType] = useState('');
   const [priority, setPriority] = useState('');
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
@@ -31,6 +32,7 @@ export default function Testcases() {
         priority,
         payload: parsedPayload,
         headers: parsedHeaders,
+        testType: testType
       };
 
       const res = await fetch(`${BACKEND_URL}/api/testcase`, {
@@ -63,6 +65,7 @@ export default function Testcases() {
 
   return (
     <div className="flex flex-col relative gap-10 p-8">
+      <div className="flex justify-between w-full">
       <nav className="self-start flex px-5 py-3 text-white/30 border border-white/30 rounded-lg bg-transparent dark:bg-gray-800 dark:border-gray-700" aria-label="Breadcrumb">
   <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
     <li className="inline-flex items-center">
@@ -80,6 +83,10 @@ export default function Testcases() {
     </li>
   </ol>
 </nav>
+<Link href={`/dashboard/projects/projects-overview/${projectId}/testruns`}>
+<h1 className="text-sm text-center text-blue-500">Go to Testcases Dashboard &#x2B67;</h1>
+</Link>
+</div>
       <div className="form-container relative flex w-full max-w-7xl flex-col items-center justify-center rounded-2xl bg-white/5 p-8 shadow-2xl backdrop-blur-lg backdrop-filter sm:p-12">
       <h1 className="text-white tracking-widest uppercase text-3xl font-bold">Add Test Cases</h1>
       <div 
@@ -116,10 +123,25 @@ export default function Testcases() {
               onChange={(e) => setPriority(e.target.value)}
               className="w-full rounded-lg border-b-2 border-white bg-transparent py-4 text-sm text-white"
             >
-              <option value="">Select Severity</option>
-              <option value="high">HIGH</option>
-              <option value="medium">MEDIUM</option>
-              <option value="low">LOW</option>
+              <option value="" className="bg-red-950 border-2 border-white rounded-md">Select Severity</option>
+              <option value="high" className="bg-red-950 border-2 border-white rounded-md">HIGH</option>
+              <option value="medium" className="bg-red-950 border-2 border-white rounded-md">MEDIUM</option>
+              <option value="low" className="bg-red-950 border-2 border-white rounded-md">LOW</option>
+            </select>
+            <select
+              required
+              value={testType}
+              onChange={(e) => setTestType(e.target.value)}
+              className="w-full rounded-lg border-b-2 border-white bg-transparent py-4 text-sm text-white"
+            >
+              <option value="" className="bg-red-950">Select Test Type</option>
+              <option value="stress" className="bg-red-950 border-2 border-white rounded-md">Stress</option>
+              <option value="functional" className="bg-red-950 border-2 border-white rounded-md">Functional</option>
+              <option value="smoke" className="bg-red-950 border-2 border-white rounded-md">Smoke</option>
+              <option value="integration" className="bg-red-950 border-2 border-white rounded-md">Integration</option>
+              <option value="regression" className="bg-red-950 border-2 border-white rounded-md">Regression</option>
+              <option value="load" className="bg-red-950 border-2 border-white rounded-md">Load</option>
+              <option value="fuzz" className="bg-red-950 border-2 border-white rounded-md">Fuzz</option>
             </select>
           </div>
           <div className="flex flex-row gap-5">
@@ -129,12 +151,12 @@ export default function Testcases() {
               onChange={(e) => setMethod(e.target.value)}
               className="w-full rounded-lg border-b-2 border-white bg-transparent py-4 text-sm text-white"
             >
-              <option value="">Select HTTP Method</option>
-              <option value="GET">GET</option>
-              <option value="POST">POST</option>
-              <option value="PUT">PUT</option>
-              <option value="DELETE">DELETE</option>
-              <option value="PATCH">PATCH</option>
+              <option value="" className="bg-red-950 border-2 border-white">Select HTTP Method</option>
+              <option value="GET" className="bg-red-950 border-2 border-white">GET</option>
+              <option value="POST" className="bg-red-950 border-2 border-white">POST</option>
+              <option value="PUT" className="bg-red-950 border-2 border-white">PUT</option>
+              <option value="DELETE" className="bg-red-950 border-2 border-white">DELETE</option>
+              <option value="PATCH" className="bg-red-950 border-2 border-white">PATCH</option>
             </select>
             <input
               type="text"
@@ -164,9 +186,6 @@ export default function Testcases() {
             Create Test Case
           </button>
           <p className="text-sm text-red-400">{message}</p>
-          <Link href="/dashboard/projects/testcases/testcases_overview" className="text-blue-400 text-center text-sm">
-            Use pre-defined generic tests
-          </Link>
         </form>
       </div>
     </div>
