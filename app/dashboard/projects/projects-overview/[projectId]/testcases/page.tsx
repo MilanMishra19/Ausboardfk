@@ -138,8 +138,6 @@ export default function Testcases() {
               <option value="stress" className="bg-red-950 border-2 border-white rounded-md">Stress</option>
               <option value="functional" className="bg-red-950 border-2 border-white rounded-md">Functional</option>
               <option value="smoke" className="bg-red-950 border-2 border-white rounded-md">Smoke</option>
-              <option value="integration" className="bg-red-950 border-2 border-white rounded-md">Integration</option>
-              <option value="regression" className="bg-red-950 border-2 border-white rounded-md">Regression</option>
               <option value="load" className="bg-red-950 border-2 border-white rounded-md">Load</option>
               <option value="fuzz" className="bg-red-950 border-2 border-white rounded-md">Fuzz</option>
             </select>
