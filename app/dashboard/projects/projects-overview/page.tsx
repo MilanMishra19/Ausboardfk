@@ -55,6 +55,24 @@ export default function ProjectDashboard(){
         };
         fetchProjects();
     },[]);
+    const handleDelete = async(projectId:string)=>{
+      const confirmDelete = confirm("Are you sure you want to delete this project?")
+      if(!confirmDelete) return;
+      try{
+        const res = await fetch(`${BACKEND_URL}/api/project/${projectId}`,{
+          method:"DELETE",
+          credentials:"include"
+        });
+        if(!res.ok){
+          throw new Error("Error deleting project!");
+        }
+        setProjectData(prev=>prev.filter(p=>p.projectId!==projectId));
+        alert("Project deleted successfully!");
+      } catch(err) {
+        console.error(err);
+        alert("Some error occured while deleting your project.")
+      }
+    }
     return(
         <div className="flex flex-col items-center justify-between gap-5 p-6">
             <h1 className="text-sm font-bold tracking-widest uppercase text-white">Your projects</h1>
@@ -90,7 +108,7 @@ export default function ProjectDashboard(){
                     alt="perf"
                     height={500}
                     width={500}
-                    className="h-10 w-10 bg-black rounded-full border-4 border-red-950"
+                    className="h-10 w-10 bg-black rounded-full border-4 border-red-950 animate-pulse"
                   />
                   <div className="relative" ref={(el) => { menuRefs.current[index] = el; }}>
                   <button className="text-xl font-extrabold cursor-pointer text-white" onClick={() => toggleMenu(index)}>&#8230;</button>
@@ -98,14 +116,14 @@ export default function ProjectDashboard(){
                     <div className="absolute right-0 mt-2 w-32 bg-gray-950 text-black rounded-md shadow-lg z-10">
                         <ul className="flex flex-col text-xs uppercase text-white">
                             <Link href={`/dashboard/projects/projects-overview/${project.projectId}/testcases`}>
-                            <li className="px-4 py-2 hover:bg-white/10 cursor-pointer">Run Tests</li>
-                            </Link>
-                            <Link href={`/dashboard/projects/projects-overview/${project.projectId}/testruns`}>
                             <li className="px-4 py-2 hover:bg-white/10 cursor-pointer">Add Testcases</li>
                             </Link>
                             <Link href={`/dashboard/projects/projects-overview/${project.projectId}/testruns`}>
-                            <li className="px-4 py-2 hover:bg-white/10 cursor-pointer">Testcase Overview</li>
+                            <li className="px-4 py-2 hover:bg-white/10 cursor-pointer">Testcases Overview</li>
                             </Link>
+                            <button onClick={()=>handleDelete(project.projectId)}>
+                            <li className="px-4 py-2 hover:bg-white/10 cursor-pointer text-red-500 uppercase">Delete</li>
+                            </button>
                         </ul>
                     </div>
                   )}
