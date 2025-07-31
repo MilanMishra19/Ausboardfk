@@ -1,8 +1,4 @@
-Thanks Milan — you're almost there! I’ve corrected the formatting issues, fixed the misplaced code block, and added a **📸 Screenshots** section for you to include visual examples of your app.
 
-Here’s the **clean, corrected, copy-paste-ready `README.md`**:
-
----
 
 ````markdown
 # 🚀 Ausboard – API Testing Frontend
