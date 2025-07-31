@@ -13,7 +13,7 @@ Ausboard is a powerful and intuitive API testing platform that supports various 
 - 🧪 Run **multiple test cases simultaneously**
 - 📊 Displays **latency**, **throughput**, **execution time**, and other performance metrics
 - 📁 Organized interface for managing test cases and results
-- ⚡ Real-time updates and responsive design
+- ⚡ Real-time updates and **Laptop only design**
 
 ---
 
