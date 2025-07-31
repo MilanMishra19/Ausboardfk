@@ -21,9 +21,9 @@ Ausboard is a powerful and intuitive API testing platform that supports various 
 
 - **Framework:** [Next.js](https://nextjs.org/)
 - **Language:** TypeScript
-- **UI:** Tailwind CSS (if used), React Components
-- **State Management:** React Hooks, Context API (if applicable)
-- **HTTP Client:** fetch / axios (if used)
+- **UI:** Tailwind CSS , React Components
+- **State Management:** React Hooks, Context API
+- **HTTP Client:** fetch 
 
 ---
 
