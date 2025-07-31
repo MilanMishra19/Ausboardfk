@@ -1,4 +1,15 @@
 {
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/login/page": "app/login/page.js",
+  "/signup/page": "app/signup/page.js",
+  "/page": "app/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
   "/dashboard/docs/page": "app/dashboard/docs/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/dashboard/projects/page": "app/dashboard/projects/page.js",
+  "/dashboard/projects/projects-overview/[projectId]/testruns/testruns-detail/page": "app/dashboard/projects/projects-overview/[projectId]/testruns/testruns-detail/page.js",
+  "/dashboard/projects/projects-overview/[projectId]/testcases/page": "app/dashboard/projects/projects-overview/[projectId]/testcases/page.js",
+  "/dashboard/settings/page": "app/dashboard/settings/page.js",
+  "/dashboard/projects/projects-overview/page": "app/dashboard/projects/projects-overview/page.js",
+  "/dashboard/projects/projects-overview/[projectId]/testruns/page": "app/dashboard/projects/projects-overview/[projectId]/testruns/page.js"
 }

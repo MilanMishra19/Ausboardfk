@@ -75,7 +75,7 @@ export default function Project(){
   {
     title: "Fill in the details",
     description:
-      "Our test are driven by selenium, JNest and postman. All details are necessary for a seamless testing environment.",
+      "Our tests are driven by the details you provide. We are working on adding more test features to make it an all in one test suite for your requirements.",
     content: (
       <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
         <Image height={500} width={500} src='/detailsp.jpeg' alt='item' className='object-cover w-full h-full'/>

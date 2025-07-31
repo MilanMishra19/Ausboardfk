@@ -1,0 +1,15 @@
+{
+  "/favicon.ico/route": "/favicon.ico",
+  "/_not-found/page": "/_not-found",
+  "/login/page": "/login",
+  "/signup/page": "/signup",
+  "/page": "/",
+  "/dashboard/page": "/dashboard",
+  "/dashboard/docs/page": "/dashboard/docs",
+  "/dashboard/projects/page": "/dashboard/projects",
+  "/dashboard/projects/projects-overview/[projectId]/testruns/testruns-detail/page": "/dashboard/projects/projects-overview/[projectId]/testruns/testruns-detail",
+  "/dashboard/projects/projects-overview/[projectId]/testcases/page": "/dashboard/projects/projects-overview/[projectId]/testcases",
+  "/dashboard/settings/page": "/dashboard/settings",
+  "/dashboard/projects/projects-overview/page": "/dashboard/projects/projects-overview",
+  "/dashboard/projects/projects-overview/[projectId]/testruns/page": "/dashboard/projects/projects-overview/[projectId]/testruns"
+}

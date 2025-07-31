@@ -53,8 +53,8 @@ export default function Dashboard(){
         setTimeout(() => {
             setCurrentTipIndex((prev) => (prev + 1) % tips.length);
             setFade(true);
-        }, 2000);
-        }, 10000);
+        }, 1000);
+        }, 5000);
         return () => clearInterval(interval);
     }, [tips.length]);
     if (authorized === null) {
@@ -84,7 +84,7 @@ export default function Dashboard(){
                     <h1 className="text-xl font-bold">Check Docs</h1>
                     <p className="text-sm font-light text-black/30">Take a look at the documentation for guidance on how to run and set up to your first test.</p>
                     <div className="px-4 py-2 rounded-md border-2 border-black">
-                        <h1 className="tracking-widest font-bold text-md"><Link href='/dashboard/templates'>CHECK</Link></h1>
+                        <h1 className="tracking-widest font-bold text-md"><Link href='/dashboard/docs'>CHECK</Link></h1>
                     </div>
                 </div>
             </div>
